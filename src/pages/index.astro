@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ShrinkingTitle from '../components/ShrinkingTitle.tsx';
+import PostList from '../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).filter((post) => !post.data.draft);
+---
+
+<BaseLayout>
+  <ShrinkingTitle client:load />
+  <PostList posts={posts} />
+</BaseLayout>

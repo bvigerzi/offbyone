@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+}
+
+const { posts } = Astro.props;
+
+const sorted = posts.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+<section class="post-list">
+  {sorted.map((post) => (
+    <article class="post-entry">
+      <a href={`/posts/${post.id}`}>
+        <h2>{post.data.title}</h2>
+      </a>
+      <time datetime={post.data.pubDate.toISOString()}>
+        {post.data.pubDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </time>
+      {post.data.description && <p>{post.data.description}</p>}
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="tags">
+          {post.data.tags.map((tag: string) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      )}
+    </article>
+  ))}
+</section>
+
+<style>
+  .post-list {
+    max-width: 42rem;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+
+  .post-entry {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-entry:last-child {
+    border-bottom: none;
+  }
+
+  .post-entry a {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .post-entry a:hover {
+    text-decoration: underline;
+  }
+
+  .post-entry h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .post-entry time {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .post-entry p {
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+  }
+</style>
