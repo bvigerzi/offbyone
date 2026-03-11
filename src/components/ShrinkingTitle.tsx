@@ -47,7 +47,7 @@ export default function ShrinkingTitle() {
           transition: 'color 0.2s',
         }}
       >
-        Off by one
+        unstructured
       </a>
     </header>
   );
