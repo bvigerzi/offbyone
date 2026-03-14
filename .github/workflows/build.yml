@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+
+      - name: Checkout content
+        uses: actions/checkout@v4
+        with:
+          repository: bvigerzi/unstructured-content
+          token: ${{ secrets.CONTENT_REPO_TOKEN }}
+          path: _content
+
+      - name: Copy content into site
+        run: |
+          mkdir -p src/content/posts
+          cp -r _content/posts/* src/content/posts/
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build

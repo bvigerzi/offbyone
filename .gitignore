@@ -18,3 +18,6 @@ node_modules/
 .vscode/
 *.swp
 *.swo
+
+# content (pulled from unstructured-content repo at build time)
+src/content/posts/
