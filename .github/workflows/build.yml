@@ -17,6 +17,7 @@ jobs:
         with:
           repository: bvigerzi/unstructured-content
           token: ${{ secrets.CONTENT_REPO_TOKEN }}
+          ref: main
           path: _content
 
       - name: Copy content into site

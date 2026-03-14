@@ -20,4 +20,4 @@ node_modules/
 *.swo
 
 # content (pulled from unstructured-content repo at build time)
-src/content/posts/
+src/content/
