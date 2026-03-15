@@ -17,8 +17,8 @@
   const link = document.getElementById('shrinking-link');
   let rafId = 0;
 
-  const startH = header ? header.getBoundingClientRect().height / window.innerHeight * 100 : 33;
-  const minH = 8;
+  const startH = header ? header.getBoundingClientRect().height : window.innerHeight * 0.33;
+  const minH = window.innerHeight * 0.08;
 
   function handleScroll() {
     cancelAnimationFrame(rafId);
@@ -26,7 +26,7 @@
       const scrollY = window.scrollY;
       const threshold = window.innerHeight * 0.25;
       const p = Math.min(scrollY / threshold, 1);
-      if (header) header.style.height = `${startH - p * (startH - minH)}vh`;
+      if (header) header.style.height = `${startH - p * (startH - minH)}px`;
       if (link) link.style.fontSize = `clamp(2rem, ${8 - p * 6}rem, min(${8 - p * 6}rem, 10vw))`;
     });
   }

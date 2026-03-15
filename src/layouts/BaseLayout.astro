@@ -39,7 +39,13 @@ const { title = 'unstructured', description = 'A minimalistic blog' } = Astro.pr
   </head>
   <body>
     <ThemeToggle client:load />
-    <slot />
+    <main><slot /></main>
     <Nav />
   </body>
 </html>
+
+<style>
+  main {
+    flex: 1;
+  }
+</style>

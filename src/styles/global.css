@@ -36,6 +36,9 @@ body {
   transition: color 0.2s, background-color 0.2s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Typography */
