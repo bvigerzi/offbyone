@@ -43,6 +43,7 @@ jobs:
         with:
           directory-to-upload: "dist"
           target-directory: "/"
+          storage-endpoint: "https://storage.bunnycdn.com"
           storage-zone-name: "unstructured-fyi"
           storage-zone-password: "${{ secrets.BUNNY_STORAGE_PASSWORD }}"
           access-key: "${{ secrets.BUNNY_API_KEY }}"
